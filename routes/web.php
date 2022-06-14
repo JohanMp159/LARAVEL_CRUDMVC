@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,15 @@ Route::get('/categoria/crear', [CategoriaController::class,'create']);
 Route::post('/categoria/guardar', [CategoriaController::class,'store']);
 Route::get('/categoria/editar/{id}', [CategoriaController::class,'edit']);
 Route::put('/categoria/actualizar/{id}', [CategoriaController::class,'update']);
+Route::delete('/categoria/eliminar/{categoria}', [CategoriaController::class,'destroy']);
+
+
+Route::get('/producto', [ProductoController::class,'index']);
+Route::get('/producto/crear', [ProductoController::class,'create']);
+Route::post('/producto/guardar', [ProductoController::class,'store']);
+Route::get('/producto/editar/{id}', [ProductoController::class,'edit']);
+Route::put('/producto/actualizar/{id}', [ProductoController::class,'update']);
+Route::delete('/producto/eliminar/{producto}', [ProductoController::class,'destroy']);
 
 
 // Route::get('/categoria', function () {

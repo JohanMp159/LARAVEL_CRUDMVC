@@ -3,8 +3,8 @@
 @section('contenido')
 <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Categorias</h3> <br>
-          <a href="{{ url('/categoria/crear')}}">Crear</a>
+          <h3 class="card-title">Productos</h3> <br>
+          <a href="{{ url('/producto/crear')}}">Crear</a>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -23,10 +23,13 @@
                           ID: 
                       </th>
                       <th style="width: 20%">
-                          Nombre
+                          Código
                       </th>
                       <th style="width: 30%">
-                          Descripcion
+                          Nombre:
+                      </th>
+                      <th style="width: 30%">
+                          Precio:
                       </th>
                       <th style="width: 20%" >
                           Acciones
@@ -34,15 +37,16 @@
                   </tr>
               </thead>
         <tbody>
-            @foreach($categorias as $categoria)
+            @foreach($productos as $producto)
             <tr>
-                <td>{{ $categoria->id }}</td>
-                <td>{{ $categoria->nombre }}</td>
-                <td>{{ $categoria->descripcion }}</td>
+                <td>{{ $producto->id }}</td>
+                <td>{{ $producto->codigo }}</td>
+                <td>{{ $producto->nombre }}</td>
+                <td>{{ $producto->precio }}</td>
                 <td class="project-actions text-right">
-                    <form action="{{ url('/categoria/eliminar',$categoria) }}" method="POST">
+                    <form action="{{ url('/producto/eliminar',$producto) }}" method="POST">
                         @csrf
-                        <a class="btn btn-info btn-sm" href="{{url ('/categoria/editar', $categoria->id )}}">
+                        <a class="btn btn-info btn-sm" href="{{url ('/producto/editar', $producto->id )}}">
                             <i class="fas fa-pencil-alt">  </i>
                               Editar
                         </a>

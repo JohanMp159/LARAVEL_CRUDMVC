@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-    use App\Models\Categoria;
+use App\Models\Producto;
 
 
-class CategoriaController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-       $categorias = Categoria::all();
-       return view('categoria.index')
-       ->with('categorias',$categorias);
+       $productos = Producto::all();
+       return view('producto.index')
+       ->with('productos',$productos);
     }
 
     /**
@@ -27,11 +28,11 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('categoria.registrar');
+        return view('producto.registrar');
        
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,24 +40,14 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria([
+        $producto = new Producto([
+            'codigo'=>$request->get('codigo'),
             'nombre'=>$request->get('nombre'),
-            'descripcion' => $request->get('descripcion')
+            'precio' => $request->get('precio')
         ]);
 
-        $categoria->save();
-        return redirect('/categoria')->with('sucess','El producto ha sido guardado');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $producto->save();
+        return redirect('/producto')->with('sucess','El producto ha sido guardado');
     }
 
     /**
@@ -67,8 +58,8 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        $categoria = Categoria::findOrFail($id); //Consultar por un id con eloquent
-        return view('categoria/editar', compact('categoria'));
+        $producto = Producto::findOrFail($id); //Consultar por un id con eloquent
+        return view('producto/editar', compact('producto'));
     }
 
     /**
@@ -80,13 +71,14 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoria = Categoria::findOrFail($id);
-        $categoria->nombre = $request->nombre;
-        $categoria->descripcion = $request->descripcion;
+        $producto = Producto::findOrFail($id);
+        $producto->codigo = $request->codigo;
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
 
-        $categoria->update();
+        $producto->update();
 
-        return redirect('/categoria');
+        return redirect('/producto');
     }
 
     /**
@@ -95,9 +87,10 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Producto $producto)
     {
-        $categoria->delete();
-        return redirect('/categoria');
+        $producto->delete();
+        return redirect('/producto');
     }
+
 }

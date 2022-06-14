@@ -6,7 +6,7 @@
         <h3 class="card-title">Categorias</h3> <br>
         <a href="{{ url('/categoria/crear')}}" class="btn btn-primary">Crear</a>
     </div>
-    <div class="row">
+    <div style="padding:20px">
         <form name="frmRegistrar" method="POST" action="{{ url('/categoria/guardar')}}">
             @csrf
             <div class="form-group">
